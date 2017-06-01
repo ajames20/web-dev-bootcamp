@@ -15,3 +15,25 @@ body {
   float: left;
   margin: 1.66%;
 }
+
+.controls {
+  background: #fff;
+  text-align: center;
+  height: 30px;
+}
+
+.controls span {
+  color: #232323;
+}
+
+.selected {
+  background: blue;
+}
+
+
+/*.controls button {
+  height: 30px;
+  border: none;
+  outline: none;
+  background: #bcb;
+}*/
