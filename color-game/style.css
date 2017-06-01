@@ -1,11 +1,30 @@
 body {
   background-color: #232323;
   color: #fff;
+  margin: 0;
+  font-family: "Montserrat", "Avenir";
+}
+
+h1 {
+  background: steelblue;
+  color: #fff;
+  font-weight: 100;
+  font-size: 25px;
+  line-height: 1.1;
+  margin: 0 auto;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 15px 0;
 }
 
 #container {
   margin: 0 auto;
   max-width: 700px;
+}
+
+#color-display {
+  display: block;
+  font-size: 200%;
 }
 
 .square {
@@ -27,13 +46,37 @@ body {
 }
 
 .selected {
-  background: blue;
+  color: #fff;
+  background: steelblue;
 }
 
-
-/*.controls button {
-  height: 30px;
+button {
   border: none;
+  color: steelblue;
+  background: none;
+  font-size: inherit;
+  font-weight: 700;
+  height: 30px;
+  letter-spacing: 1px;
   outline: none;
-  background: #bcb;
-}*/
+  text-transform: uppercase;
+  transition: all .3s;
+}
+
+button:hover {
+  cursor: pointer;
+  color: #fff;
+  background: steelblue;
+}
+
+#message {
+  display: inline-block;
+  width: 20%;
+}
+
+.square {
+  border-radius: 5px;
+  -webkit-transition: background .4s;
+  -moz-transition: background .4s;
+  transition: background .4s;
+}

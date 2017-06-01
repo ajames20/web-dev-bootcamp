@@ -64,7 +64,7 @@ resetButton.addEventListener('click', () => {
     squares[i].style.background = colors[i];
     //Add click event listner
   }
-  h1.style.background = '#232323';
+  h1.style.background = 'steelblue';
   resetButton.textContent = 'New Colors';
 });
 
