@@ -1,13 +1,16 @@
 var express = require('express');
 var app = express();
 
+app.use(express.static('public'));// Allows static assets to be served
+app.set('view engine', 'ejs')
+
 app.get('/', (req, res) => {
-  res.render('index.ejs');
+  res.render('index');
 });
 
 app.get('/sendingInfo/:name', (req, res) => {
   var name = req.params.name;
-  res.render('info.ejs', { name: name });
+  res.render('info', { name: name });
 });
 
 app.get('/posts', (req, res) => {
@@ -16,7 +19,7 @@ app.get('/posts', (req, res) => {
     { title: 'Post 2', author: 'Gabe' },
     { title: 'Post 3', author: 'Shapel' }
   ];
-  res.render('posts.ejs', { posts: posts });
+  res.render('posts', { posts: posts });
 });
 
 app.listen(3000, () => {
