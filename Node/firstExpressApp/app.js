@@ -5,8 +5,9 @@ app.get('/', (req, res) => {
   res.send('hi there');
 });
 
-app.get('/bye', (req, res) => {
-  res.send('Goodbye')
+app.get('/:bye', (req, res) => {
+  var subDomain = req.params.bye
+  res.send(`Goodbye ${subDomain.toUpperCase()}`)
 });
 
 app.get('/dog', (req, res) => {
@@ -14,7 +15,7 @@ app.get('/dog', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.send('You are a start!')
+  res.send('You are a star!')
 });
 
 
