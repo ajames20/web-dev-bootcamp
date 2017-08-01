@@ -1,1 +1,6 @@
 <h1>Hello <%= name.charAt(0).toUpperCase() + name.slice(1) %> Welcome back!</h1>
+<% if(name.toLowerCase() === 'sini') { %>
+  <p>Great to see you Again</p>
+<% } else { %>
+  <p>Bad choice. Your name sucks <%= name.charAt(0).toUpperCase() + name.slice(1) %>!</p>
+<% } %>
