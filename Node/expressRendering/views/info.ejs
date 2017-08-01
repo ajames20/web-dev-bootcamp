@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="app.css">
+<% include partials/header %>
 
 <h1>Hello <%= name.charAt(0).toUpperCase() + name.slice(1) %> Welcome back!</h1>
 <% if(name.toLowerCase() === 'sini') { %>
@@ -6,3 +6,5 @@
 <% } else { %>
   <p>Bad choice. Your name sucks <%= name.charAt(0).toUpperCase() + name.slice(1) %>!</p>
 <% } %>
+
+<% include partials/footer %>
