@@ -1,0 +1,9 @@
+{
+  "name": "firstExpressApp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.15.3"
+  }
+}
