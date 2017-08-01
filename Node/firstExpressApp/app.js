@@ -4,11 +4,17 @@ var app = express();
 app.get('/', (req, res) => {
   res.send('hi there');
 });
+
 app.get('/bye', (req, res) => {
   res.send('Goodbye')
 });
+
 app.get('/dog', (req, res) => {
   res.send('Meow')
+});
+
+app.get('*', (req, res) => {
+  res.send('You are a start!')
 });
 
 
