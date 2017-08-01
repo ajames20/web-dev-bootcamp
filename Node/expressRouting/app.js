@@ -6,24 +6,20 @@ app.get('/', (req, res) => {
 });
 
 app.get('/speak/:animal', (req, res) => {
-  var animal = req.params.animal
-  var sound
-  if (animal === 'pig') {
-    sound = 'Oink'
-    res.send(`The ${animal} says ${sound}`)
-  } else if (animal === 'cow') {
-    sound = 'Moo'
-    res.send(`The ${animal} says ${sound}`)
-  } else if (animal === 'dog') {
-    sound = 'Woof Woof'
-    res.send(`The ${animal} says ${sound}`)
-  } else {
-    res.send('Sorry Page not found...What are you doing with your life?')
+  var animal = req.params.animal.toLowerCase()
+  var sounds = {
+    dog: 'Woof Woof',
+    cat: 'I hate you Human!',
+    pig: 'Oink',
+    cow: 'Mooo',
+    fish: '...'
   }
+  let sound = sounds[animal]
+  res.send(`The ${animal} says ${sound}`)
 });
 
 app.get('/repeat/:greeting/:num', (req, res) => {
-  let num = req.params.num;
+  let num = Number(req.params.num);
   let greeting = req.params.greeting;
   let repeatString = '';
 
