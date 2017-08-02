@@ -1,0 +1,11 @@
+{
+  "name": "movieAPI",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "request": "^2.81.0"
+  }
+}
