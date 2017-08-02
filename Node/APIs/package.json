@@ -1,0 +1,9 @@
+{
+  "name": "APIs",
+  "version": "1.0.0",
+  "main": "first_request.js",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
