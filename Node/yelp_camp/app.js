@@ -18,6 +18,9 @@ app.get('/campgrounds', (req, res) => {
   res.render('campgrounds', { campgrounds: campgrounds })
 });
 
+app.post('/campgrounds', (req, res) => {
+  res.send('This is the post route.');
+});
 
 app.listen(3000, () => {
   console.log('Server running on port 3000');
