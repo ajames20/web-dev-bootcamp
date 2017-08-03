@@ -1,9 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
-// temp array for building campgrounds
-
-app.set('view engine', 'ejs')
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   res.render('landing');
@@ -19,7 +19,12 @@ app.get('/campgrounds', (req, res) => {
 });
 
 app.post('/campgrounds', (req, res) => {
-  res.send('This is the post route.');
+  res.send('You hit the post route.');
+  // console.log(JSON.parse(req.body.name))
+});
+
+app.get('/campgrounds/new', (req, res) => {
+  res.render('new.ejs');
 });
 
 app.listen(3000, () => {
