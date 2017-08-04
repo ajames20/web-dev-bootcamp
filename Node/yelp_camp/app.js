@@ -1,31 +1,49 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const app = express();
+
+mongoose.connect("mongodb://localhost/yelp_camp", { useMongoClient: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-const campgrounds = [
-  { name: 'Salmon Creek', image: 'https://farm5.staticflickr.com/4153/4835814837_feef6f969b.jpg' },
-  { name: 'Goats Breath', image: 'https://farm4.staticflickr.com/3270/2617191414_c5d8a25a94.jpg' },
-  { name: 'Bears Water', image: 'https://farm3.staticflickr.com/2259/2182093741_164dc44a24.jpg' }
-];
+// SCHEMA SETUP
+const campgroundsSchema = new mongoose.Schema({
+  name: String,
+  image: String
+});
+
+const Campground = mongoose.model('Campground', campgroundsSchema);
 
 app.get('/', (req, res) => {
   res.render('landing');
 });
 
 app.get('/campgrounds', (req, res) => {
-  res.render('campgrounds', { campgrounds: campgrounds })
+  // Get all campgrounds from db and then render campgrounds
+  Campground.find({}, (err, allCampgrounds) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('campgrounds', { campgrounds: allCampgrounds });
+    };
+  });
 });
 
 app.post('/campgrounds', (req, res) => {
-  let name = req.body.name;
-  let image = req.body.image;
-  let newCampground = { name: name, image: image };
-  campgrounds.push(newCampground);
-  // redirect to campgrounds page
-  res.redirect('/campgrounds');
+  var name = req.body.name;
+  var image = req.body.image;
+  var newCampground = { name: name, image: image };
+  // Create a new Campground and save to DB
+  Campground.create(newCampground, (err, newlyCreated) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // redirect to campgrounds page
+      res.redirect('/campgrounds');
+    }
+  });
 });
 
 app.get('/campgrounds/new', (req, res) => {
@@ -33,5 +51,5 @@ app.get('/campgrounds/new', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Server running on port 3000');
+  console.log('Yelp Camp server running on port 3000');
 });
