@@ -89,7 +89,18 @@ app.put('/blogs/:id', (req, res) => {
     if (err) {
       res.redirect('/blogs');
     } else {
-      res.redirect(`/blogs/${req.params.id}`)
+      res.redirect(`/blogs/${req.params.id}`);
+    }
+  });
+});
+
+// DESTROY ROUTE
+app.delete('/blogs/:id', (req, res) => {
+  Blog.findByIdAndRemove(req.params.id, (err) => {
+    if (err) {
+      res.redirect('/blogs')
+    } else {
+      res.redirect('/blogs')
     }
   });
 });

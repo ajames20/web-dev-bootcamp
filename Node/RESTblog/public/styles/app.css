@@ -18,8 +18,17 @@ i.icon {
 
 .description p {
   line-height: 1.7;
+  margin-bottom: 1rem;
 }
 
 .huge.header {
   text-align: center;
+}
+
+.delete-button {
+  display: inline;
+}
+
+.ui[class*="top attached"].segment {
+  margin-bottom: 1.3rem;
 }
