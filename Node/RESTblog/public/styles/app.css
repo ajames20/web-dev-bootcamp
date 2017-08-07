@@ -1,9 +1,13 @@
+body {
+  background-color: #f0f0f0;
+}
+
 .code {
   font-size: 2em;
 }
 
 .main.container {
-  margin-top: 7.0em;
+  margin-top: 5.0em;
 }
 
 .content {
