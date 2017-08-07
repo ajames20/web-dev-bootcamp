@@ -12,6 +12,7 @@
     "ejs": "^2.5.7"
   },
   "scripts": {
-    "mongo": "mongod --dbpath data"
+    "mongo": "mongod --dbpath data",
+    "start": "node app.js"
   }
 }
