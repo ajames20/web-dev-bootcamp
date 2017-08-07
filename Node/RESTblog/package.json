@@ -2,5 +2,16 @@
   "name": "RESTblog",
   "version": "1.0.0",
   "main": "app.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.5"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7"
+  },
+  "scripts": {
+    "mongo": "mongod --dbpath data"
+  }
 }
