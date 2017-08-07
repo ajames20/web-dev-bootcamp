@@ -85,7 +85,13 @@ app.get('/blogs/:id/edit', (req, res) => {
 
 // UPDATE REQUEST
 app.put('/blogs/:id', (req, res) => {
-  res.send('Update Route');
+  Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
+    if (err) {
+      res.redirect('/blogs');
+    } else {
+      res.redirect(`/blogs/${req.params.id}`)
+    }
+  });
 });
 
 app.listen(3000, () => {
