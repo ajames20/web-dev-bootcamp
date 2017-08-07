@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "mongo": "mongod --dbpath data"
+    "mongo": "mongod --dbpath data",
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
