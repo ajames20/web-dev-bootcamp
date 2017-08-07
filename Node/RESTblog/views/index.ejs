@@ -10,7 +10,7 @@
             <img src="<%= blog.image %>" alt="<%= blog.title %>">
           </div>
           <div class="content">
-            <a href="/blogs/<%= blog._id %>"><%= blog.title %></a>
+            <h2><a href="/blogs/<%= blog._id %>"><%= blog.title %></a></h2>
             <div class="meta">
               <span><%= blog.created.toDateString() %></span>
             </div>
