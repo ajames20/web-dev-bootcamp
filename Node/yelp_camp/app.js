@@ -17,6 +17,19 @@ app.use(express.static(__dirname + '/public'));
 
 seedDB();
 
+// PASSPORT CONFIGURATION
+app.use(require('express-session')({
+  secret: 'My secret passphrase',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.get('/', (req, res) => {
   res.render('landing');
 });
@@ -67,6 +80,7 @@ app.get('/campgrounds/:id', (req, res) => {
     }
   });
 });
+
 // ====================
 // COMMENTS ROUTES
 // ====================
@@ -103,6 +117,42 @@ app.post('/campgrounds/:id/comments', (req, res) => {
     }
   });
 });
+
+// ====================
+// AUTH ROUTES
+// ====================
+
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+app.post('/register', (req, res) => {
+  var newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      return res.render('/register');
+    }
+    passport.authenticate('local')(req, res, () => {
+      res.redirect('/campgrounds');
+    });
+  });
+});
+
+// SHOW login form
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.post('/login', passport.authenticate('local',
+  {
+    successRedirect: '/campgrounds',
+    failureRedirect: '/login'
+  }), (req, res) => {
+
+  });
+
+
 
 app.listen(3000, () => {
   console.log('Yelp Camp server running on port 3000');
