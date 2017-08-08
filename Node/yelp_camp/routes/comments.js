@@ -4,7 +4,7 @@ var Campground = require('../models/campground');
 var User = require('../models/user');
 var Comment = require('../models/comment');
 
-// Comments New
+// COMMENTS ROUTE - New
 router.get('/new', isLoggedIn, (req, res) => {
   // Find campgrounds by id
   Campground.findById(req.params.id, (err, campground) => {
@@ -30,6 +30,8 @@ router.post('/', isLoggedIn, (req, res) => {
           console.log(err);
           res.redirect('/campgrounds');
         } else {
+          // Add username and id to comment
+          // Save comment
           campground.comments.push(comment);
           campground.save();
           res.redirect(`/campgrounds/${campground._id}`)
