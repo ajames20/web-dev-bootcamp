@@ -19,6 +19,7 @@ const data = [
     description: "Roof party you probably haven't heard of them tote bag, hella drinking vinegar butcher PBR&B Blue Bottle fanny pack asymmetrical typewriter. Intelligentsia YOLO salvia, blog chia hella sartorial banh mi cornhole brunch tofu normcore Marfa. Intelligentsia street art squid typewriter mustache. Typewriter skateboard PBR Tonx meggings sartorial. Craft beer distillery Brooklyn authentic XOXO. Mustache mumblecore Banksy Neutra 3 wolf moon food truck irony. Meggings meh quinoa chillwave next level."
   }
 ]
+
 function seedDb() {
   // Remove all DB data
   Campground.remove({}, (err) => {
@@ -27,7 +28,7 @@ function seedDb() {
     }
     console.log('Removed Campgrounds');
     // Add campground data to DB
-    data.forEach(seed => {
+    data.forEach((seed) => {
       Campground.create(seed, (err, campground) => {
         if (err) {
           console.log(err);

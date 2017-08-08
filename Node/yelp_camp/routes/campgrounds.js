@@ -1,5 +1,4 @@
 var Campground = require('../models/campground');
-var Comment = require('../models/comment');
 var express = require('express');
 var router = express.Router();
 
@@ -11,7 +10,7 @@ router.get('/', (req, res) => {
       console.log(err);
     } else {
       res.render('campgrounds/index', { campgrounds: allCampgrounds });
-    };
+    }
   });
 });
 
@@ -20,8 +19,13 @@ router.post('/', (req, res) => {
   var name = req.body.name;
   var image = req.body.image;
   var desc = req.body.description;
-  var newCampground = { name: name, image: image, description: desc };
+  var newCampground = {
+    name,
+    image,
+    description: desc
+  };
   // Create a new Campground and save to DB
+
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
       console.log(err);
@@ -51,12 +55,12 @@ router.get('/:id', (req, res) => {
 });
 
 // MIDDLEWARE isLoggedIn
-function isLoggedIn(req, res, next) {
+function isLoggedIn (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
-  } else {
-    res.redirect('/login');
   }
+  res.redirect('/login');
+
 }
 
 module.exports = router;

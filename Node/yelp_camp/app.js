@@ -3,13 +3,13 @@ var bodyParser = require('body-parser');
 var User = require('./models/user')
 var mongoose = require('mongoose');
 var passport = require('passport');
-// var seedDB = require('./seeds');
+var seedDB = require('./seeds');
 var express = require('express');
 var app = express();
 
 // REQUIRE ROUTES 
-var commentsRoutes = require('./routes/comments');
 var campgroundRoutes = require('./routes/campgrounds');
+var commentsRoutes = require('./routes/comments');
 var indexRoutes = require('./routes/index');
 
 
@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 
-// seedDB(); //seed the database
+// seedDB(); // seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({

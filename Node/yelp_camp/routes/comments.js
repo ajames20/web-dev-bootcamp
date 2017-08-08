@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router({ mergeParams: true });
 var Campground = require('../models/campground');
-var User = require('../models/user');
 var Comment = require('../models/comment');
 
 // COMMENTS ROUTE - New
@@ -11,7 +10,7 @@ router.get('/new', isLoggedIn, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render('comments/new', { campground: campground });
+      res.render('comments/new', { campground });
     }
   });
 });
@@ -31,7 +30,10 @@ router.post('/', isLoggedIn, (req, res) => {
           res.redirect('/campgrounds');
         } else {
           // Add username and id to comment
+          comment.author.id = req.user.id;
+          comment.author.username = req.user.username;
           // Save comment
+          comment.save();
           campground.comments.push(comment);
           campground.save();
           res.redirect(`/campgrounds/${campground._id}`)
@@ -45,9 +47,9 @@ router.post('/', isLoggedIn, (req, res) => {
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
-  } else {
-    res.redirect('/login');
   }
+  res.redirect('/login');
+
 }
 
 module.exports = router;
