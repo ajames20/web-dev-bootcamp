@@ -28,7 +28,7 @@ function seedDb() {
     console.log('Removed Campgrounds');
     // Add campground data to DB
     data.forEach(seed => {
-      Campground.create(seed, (err, data) => {
+      Campground.create(seed, (err, campground) => {
         if (err) {
           console.log(err);
         } else {

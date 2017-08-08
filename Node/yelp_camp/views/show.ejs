@@ -4,10 +4,20 @@
       <h1>
         <%= campground.name %>
       </h1>
-      <img src="<%= campground.image %>" alt="">
-      <p>
-        <%= campground.description %>
-      </p>
+      <figure class="figure">
+        <img class="img-rounded" src="<%= campground.image %>" alt="">
+        <figcaption class="figure-caption">
+          <%= campground.description %>
+        </figcaption>
+      </figure>
+    </div>
+    <div>
+      <% campground.comments.forEach(comment => { %>
+        <p>
+          <strong><%= comment.author %></strong> -
+          <%= comment.text %>
+        </p>
+        <% }) %>
     </div>
   </div>
   <% include partials/footer %>

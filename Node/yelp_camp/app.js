@@ -1,6 +1,4 @@
 const Campground = require('./models/campground');
-// const Comment = require('./models/comment');
-// const User = require('./models/user')
 const seedDB = require('./seeds');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -13,21 +11,6 @@ mongoose.connect("mongodb://localhost/yelp_camp", { useMongoClient: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-
-// Campground.create(
-//   {
-//     name: 'Lake Montain',
-//     image: 'https://farm3.staticflickr.com/2923/13950231147_7032e443a0.jpg',
-//     description: 'This is a lake next to a mountain!!'
-//   }, (err, campground) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       // redirect to campgrounds page
-//       console.log('We made a new Campground with a description')
-//       console.log(campground)
-//     }
-//   });
 
 app.get('/', (req, res) => {
   res.render('landing');
@@ -70,7 +53,7 @@ app.get('/campgrounds/new', (req, res) => {
 // SHOW ROUTE - shows more info about individual campground
 app.get('/campgrounds/:id', (req, res) => {
   // Find campground by ID
-  Campground.findById(req.params.id, (err, foundCampground) => {
+  Campground.findById(req.params.id).populate('comments').exec((err, foundCampground) => {
     if (err) {
       console.log(err)
     } else {
