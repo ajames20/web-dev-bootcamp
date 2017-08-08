@@ -9,3 +9,9 @@
 .thumbnail .caption-full {
   padding: 9px;
 }
+
+.fixed-height {
+  min-height: 175px;
+  max-height: 175px;
+  height: 100%;
+}
