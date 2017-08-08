@@ -5,12 +5,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 
-seedDB();
 
 mongoose.connect("mongodb://localhost/yelp_camp", { useMongoClient: true });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+
+seedDB();
 
 app.get('/', (req, res) => {
   res.render('landing');
