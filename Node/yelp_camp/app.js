@@ -1,21 +1,18 @@
-const express = require('express');
+const Campground = require('./models/campground');
+// const Comment = require('./models/comment');
+// const User = require('./models/user')
+const seedDB = require('./seeds');
 const bodyParser = require('body-parser');
+const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+
+seedDB();
 
 mongoose.connect("mongodb://localhost/yelp_camp", { useMongoClient: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-
-// SCHEMA SETUP
-const campgroundsSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-const Campground = mongoose.model('Campground', campgroundsSchema);
 
 // Campground.create(
 //   {
