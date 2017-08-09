@@ -15,3 +15,7 @@
   max-height: 175px;
   height: 100%;
 }
+
+.delete-form {
+  display: inline;
+}
