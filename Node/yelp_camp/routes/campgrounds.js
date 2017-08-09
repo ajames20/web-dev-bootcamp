@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
 router.post('/', middleWare.isLoggedIn, (req, res) => {
   var name = req.body.name;
   var image = req.body.image;
+  var price = req.body.price;
   var desc = req.body.description;
   var author = {
     id: req.user.id,
@@ -28,10 +29,11 @@ router.post('/', middleWare.isLoggedIn, (req, res) => {
     name,
     image,
     author,
+    price,
     description: desc
   };
-  // Create a new Campground and save to DB
 
+  // Create a new Campground and save to DB
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
       console.log(err);
