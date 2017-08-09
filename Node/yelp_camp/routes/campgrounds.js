@@ -89,7 +89,7 @@ router.delete('/:id', campgroundOwnership, (req, res) => {
 });
 
 // MIDDLEWARE isLoggedIn
-function isLoggedIn (req, res, next) {
+function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
@@ -97,11 +97,10 @@ function isLoggedIn (req, res, next) {
 
 }
 
-function campgroundOwnership (req, res, next) {
+function campgroundOwnership(req, res, next) {
   if (req.isAuthenticated()) {
     Campground.findById(req.params.id, (err, foundCampground) => {
       if (err) {
-        console.log(err);
         res.redirect('back');
       } else {
         // Does user own campground
