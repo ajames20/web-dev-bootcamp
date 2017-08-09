@@ -49,13 +49,4 @@ router.get('/logout', (req, res) => {
   res.redirect('/campgrounds');
 });
 
-// MIDDLEWARE isLoggedIn
-function isLoggedIn (req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-
-}
-
 module.exports = router;
