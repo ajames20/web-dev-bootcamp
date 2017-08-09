@@ -51,10 +51,33 @@ router.get('/:id', (req, res) => {
   // Find campground by ID
   Campground.findById(req.params.id).populate('comments').exec((err, foundCampground) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       // Render that individual campground
-      res.render('campgrounds/show', { campground: foundCampground })
+      res.render('campgrounds/show', { campground: foundCampground });
+    }
+  });
+});
+
+// EDIT ROUTE for campgrounds
+router.get('/:id/edit', (req, res) => {
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/campgrounds');
+    } else {
+      res.render('campgrounds/edit', { campground: foundCampground });
+    }
+  });
+});
+
+// UPDATE ROUTE for campgrounds
+router.put('/:id', (req, res) => {
+  Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect(`/campgrounds/${req.params.id}`);
     }
   });
 });

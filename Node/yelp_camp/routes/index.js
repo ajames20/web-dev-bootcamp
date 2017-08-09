@@ -16,9 +16,11 @@ router.get('/register', (req, res) => {
 // Sign Up Logic
 router.post('/register', (req, res) => {
   var newUser = new User({ username: req.body.username });
+
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
       console.log(err);
+
       return res.render('/register');
     }
     passport.authenticate('local')(req, res, () => {
@@ -44,16 +46,16 @@ router.post('/login', passport.authenticate('local',
 // LOGOUT 
 router.get('/logout', (req, res) => {
   req.logOut();
-  res.redirect('/campgrounds')
+  res.redirect('/campgrounds');
 });
 
 // MIDDLEWARE isLoggedIn
-function isLoggedIn(req, res, next) {
+function isLoggedIn (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
-  } else {
-    res.redirect('/login');
   }
+  res.redirect('/login');
+
 }
 
 module.exports = router;

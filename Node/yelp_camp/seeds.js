@@ -18,9 +18,9 @@ const data = [
     image: 'https://farm6.staticflickr.com/5334/9925256586_c06d949b3e.jpg',
     description: "Roof party you probably haven't heard of them tote bag, hella drinking vinegar butcher PBR&B Blue Bottle fanny pack asymmetrical typewriter. Intelligentsia YOLO salvia, blog chia hella sartorial banh mi cornhole brunch tofu normcore Marfa. Intelligentsia street art squid typewriter mustache. Typewriter skateboard PBR Tonx meggings sartorial. Craft beer distillery Brooklyn authentic XOXO. Mustache mumblecore Banksy Neutra 3 wolf moon food truck irony. Meggings meh quinoa chillwave next level."
   }
-]
+];
 
-function seedDb() {
+function seedDb () {
   // Remove all DB data
   Campground.remove({}, (err) => {
     if (err) {
@@ -45,7 +45,7 @@ function seedDb() {
               } else {
                 campground.comments.push(comment);
                 campground.save();
-                console.log('Created new Comment.')
+                console.log('Created new Comment.');
               }
             });
         }
