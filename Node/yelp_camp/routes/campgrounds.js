@@ -5,27 +5,27 @@ var router = express.Router();
 var geocoder = require('geocoder');
 
 // INDEX ROUTE - show all campgrounds
-router.get('/', (req, res) => {
-  if (req.query.search) {
+router.get("/", (req, res) => {
+  if (req.query.search && req.xhr) {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    // Get all campgrounds from DB
 
     Campground.find({ name: regex }, (err, allCampgrounds) => {
       if (err) {
         console.log(err);
       } else {
-        res.render('campgrounds/index', {
-          campgrounds: allCampgrounds,
-          page: 'campgrounds'
-        });
+        res.status(200).json(allCampgrounds);
       }
     });
   } else {
-    // Get all campgrounds from db and then render campgrounds
+    // Get all campgrounds from DB
     Campground.find({}, (err, allCampgrounds) => {
       if (err) {
         console.log(err);
+      } else if (req.xhr) {
+        res.json(allCampgrounds);
       } else {
-        res.render('campgrounds/index', {
+        res.render("campgrounds/index", {
           campgrounds: allCampgrounds,
           page: 'campgrounds'
         });
