@@ -2,6 +2,7 @@ var Campground = require('../models/campground');
 var middleWare = require('../middleware');
 var express = require('express');
 var router = express.Router();
+var geocoder = require('geocoder');
 
 // INDEX ROUTE - show all campgrounds
 router.get('/', (req, res) => {
@@ -10,7 +11,10 @@ router.get('/', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render('campgrounds/index', { campgrounds: allCampgrounds });
+      res.render('campgrounds/index', {
+        campgrounds: allCampgrounds,
+        page: 'campgrounds'
+      });
     }
   });
 });
@@ -19,7 +23,7 @@ router.get('/', (req, res) => {
 router.post('/', middleWare.isLoggedIn, (req, res) => {
   var name = req.body.name;
   var image = req.body.image;
-  var price = req.body.price;
+  var cost = req.body.cost;
   var desc = req.body.description;
   var author = {
     id: req.user.id,
@@ -28,9 +32,9 @@ router.post('/', middleWare.isLoggedIn, (req, res) => {
   var newCampground = {
     name,
     image,
-    author,
-    price,
-    description: desc
+    cost,
+    description: desc,
+    author
   };
 
   // Create a new Campground and save to DB
@@ -70,13 +74,30 @@ router.get('/:id/edit', middleWare.campgroundOwnership, (req, res) => {
 });
 
 // UPDATE ROUTE for campgrounds
-router.put('/:id', middleWare.campgroundOwnership, (req, res) => {
-  Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect(`/campgrounds/${req.params.id}`);
-    }
+router.put("/:id", (req, res) => {
+  geocoder.geocode(req.body.location, (err, data) => {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
+    var newData = {
+      name: req.body.name,
+      image: req.body.image,
+      description: req.body.description,
+      cost: req.body.cost,
+      location,
+      lat,
+      lng
+    };
+
+    Campground.findByIdAndUpdate(req.params.id, { $set: newData }, (err, campground) => {
+      if (err) {
+        req.flash("error", err.message);
+        res.redirect("back");
+      } else {
+        req.flash("success", "Successfully Updated!");
+        res.redirect("/campgrounds/" + campground._id);
+      }
+    });
   });
 });
 
