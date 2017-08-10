@@ -19,32 +19,43 @@ router.get('/', (req, res) => {
   });
 });
 
-// CREATE ROUTE - add new campground to DB
-router.post('/', middleWare.isLoggedIn, (req, res) => {
+// CREATE - add new campground to DB
+router.post("/", middleWare.isLoggedIn, (req, res) => {
+  // get data from form and add to campgrounds array
   var name = req.body.name;
   var image = req.body.image;
-  var cost = req.body.cost;
   var desc = req.body.description;
   var author = {
-    id: req.user.id,
+    id: req.user._id,
     username: req.user.username
   };
-  var newCampground = {
-    name,
-    image,
-    cost,
-    description: desc,
-    author
-  };
+  var cost = req.body.cost;
 
-  // Create a new Campground and save to DB
-  Campground.create(newCampground, (err, newlyCreated) => {
-    if (err) {
-      console.log(err);
-    } else {
-      // redirect to campgrounds page
-      res.redirect('/campgrounds');
-    }
+  geocoder.geocode(req.body.location, (err, data) => {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
+    var newCampground = {
+      name,
+      image,
+      description: desc,
+      cost,
+      author,
+      location,
+      lat,
+      lng
+    };
+    // Create a new campground and save to DB
+
+    Campground.create(newCampground, (err, newlyCreated) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // redirect back to campgrounds page
+        console.log(newlyCreated);
+        res.redirect("/campgrounds");
+      }
+    });
   });
 });
 
