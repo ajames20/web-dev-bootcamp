@@ -43,7 +43,7 @@
   </nav>
 
   <div class="container">
-    <div class="row">
+    <div class="row" style="position: relative;">
       <% if(error && error.length > 0) { %>
         <div class="alert alert-danger col-xs-4 col-md-offset-4 text-center">
           <p>
@@ -53,7 +53,7 @@
         <% } %>
 
           <% if(success && success.length > 0) { %>
-            <div class="alert alert-success col-xs-4 col-md-offset-4 text-center" style="width: 30%">
+            <div class="alert alert-success col-xs-4 col-md-offset-4 text-center">
               <p>
                 <%= success %>
               </p>
