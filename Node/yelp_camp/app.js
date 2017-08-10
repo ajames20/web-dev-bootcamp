@@ -22,6 +22,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(flash());
 // seedDB(); // seed the database
+app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
@@ -30,7 +31,6 @@ app.use(require('express-session')({
   saveUninitialized: false
 }));
 
-app.locals.moment = require('moment');
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
@@ -47,6 +47,7 @@ app.use((req, res, next) => {
 app.use('/', indexRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/comments', commentsRoutes);
+
 
 app.listen(3000, () => {
   console.log('Yelp Camp server running on port 3000');

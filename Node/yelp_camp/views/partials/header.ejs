@@ -43,20 +43,22 @@
   </nav>
 
   <div class="container">
-    <% if(error && error.length > 0) { %>
-      <div class="alert alert-danger">
-        <p>
-          <%=error %>
-        </p>
-      </div>
-      <% } %>
+    <div class="row">
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger col-xs-4 col-md-offset-4 text-center">
+          <p>
+            <%=error %>
+          </p>
+        </div>
+        <% } %>
 
-        <% if(success && success.length > 0) { %>
-          <div class="alert alert-success">
-            <p>
-              <%= success %>
-            </p>
-          </div>
-          <% } %>
+          <% if(success && success.length > 0) { %>
+            <div class="alert alert-success col-xs-4 col-md-offset-4 text-center" style="width: 30%">
+              <p>
+                <%= success %>
+              </p>
+            </div>
+            <% } %>
+    </div>
   </div>
   <div class="container">

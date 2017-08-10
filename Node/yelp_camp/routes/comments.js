@@ -35,6 +35,7 @@ router.post('/', middleWare.isLoggedIn, (req, res) => {
           comment.author.username = req.user.username;
           // Save comment
           comment.save();
+          console.log(comment);
           campground.comments.push(comment);
           campground.save();
           req.flash('success', 'Successfully added comment');
@@ -60,23 +61,25 @@ router.get('/:comment_id/edit', middleWare.checkCommentOwnership, (req, res) => 
 });
 
 // COMMENTS UPDATE ROUTE
-router.put('/:comment_id', middleWare.checkCommentOwnership, (req, res) => {
-  Campground.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
+router.put('/:comment_id', (req, res) => {
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
     if (err) {
       res.redirect('back');
     } else {
+      req.flash("success", `Successfully Updated!`);
+      // console.log(req.body.comment);
       res.redirect(`/campgrounds/${req.params.id}`);
     }
   });
 });
 
-// COMMENT DESTROY ROUTE
+// COMMENTs DESTROY ROUTE
 router.delete('/:comment_id', middleWare.checkCommentOwnership, (req, res) => {
   Comment.findByIdAndRemove(req.params.comment_id, (err) => {
     if (err) {
       res.redirect('back');
     } else {
-      req.flash('succes', 'Comment deleted');
+      req.flash('success', 'Comment deleted');
       res.redirect(`/campgrounds/${req.params.id}`);
     }
   });

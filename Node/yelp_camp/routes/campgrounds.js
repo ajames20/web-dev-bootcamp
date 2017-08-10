@@ -138,7 +138,8 @@ router.delete('/:id', middleWare.campgroundOwnership, (req, res) => {
   });
 });
 
-function escapeRegex(text) {
+function escapeRegex (text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
+
 module.exports = router;
