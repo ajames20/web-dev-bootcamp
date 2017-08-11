@@ -23,7 +23,3 @@ $('#campground-search').on('input', function () {
     });
   });
 });
-
-$('#campground-search').submit((event) => {
-  event.preventDefault();
-});

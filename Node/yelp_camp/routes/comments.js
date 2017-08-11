@@ -38,7 +38,7 @@ router.post('/', middleWare.isLoggedIn, (req, res) => {
           console.log(comment);
           campground.comments.push(comment);
           campground.save();
-          req.flash('success', 'Successfully added comment');
+          req.flash('success', 'Successfully Added Comment');
           res.redirect(`/campgrounds/${campground._id}`);
         }
       });
@@ -66,7 +66,7 @@ router.put('/:comment_id', (req, res) => {
     if (err) {
       res.redirect('back');
     } else {
-      req.flash("success", `Successfully Updated!`);
+      req.flash("success", 'Comment Updated!');
       // console.log(req.body.comment);
       res.redirect(`/campgrounds/${req.params.id}`);
     }
