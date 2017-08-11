@@ -55,6 +55,16 @@ body {
   display: inline-block;
 }
 
+.form-control {
+  border-radius: 0;
+}
+
+.btn-group-lg>.btn,
+.btn-lg,
+.btn {
+  border-radius: 0;
+}
+
 
 /* Flexbox grid fix */
 
