@@ -65,9 +65,16 @@ body {
   border-radius: 0;
 }
 
-.max-image {
-  min-height: 179px;
-  max-height: 179px;
+.thumbnail-image {
+  height: 400px;
+}
+
+.loader {
+  width: 240px;
+  height: 240px;
+  display: inline-block;
+  background-size: cover;
+  background: transparent url('../images/imageLoader.gif') no-repeat center;
 }
 
 
@@ -85,7 +92,8 @@ body {
   left: 0;
   right: 0;
   text-align: center;
-  line-height: 2.5;
+  line-height: 1.5;
+  padding-top: 3px;
   overflow: hidden;
   -webkit-box-shadow: 0 0 5px black;
   -moz-box-shadow: 0 0 5px black;
